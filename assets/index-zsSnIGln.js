@@ -10139,12 +10139,12 @@ const gh = Kc,
   });
 Yc.displayName = "Row";
 const wh = Yc,
-  xh = "/assets/proy-1-tkbW3FHi.webp",
-  Sh = "/assets/proy-2-FHVJFFyN.webp",
-  kh = "/assets/proy-3-Xyym51tN.webp",
-  Eh = "/assets/proy-4-3wanK3ot.webp",
-  Nh = "/assets/proy-5-pZekphWe.webp",
-  Ch = "/assets/logo-wvjWeUmf.png",
+  xh = "./assets/proy-1-tkbW3FHi.webp",
+  Sh = "./assets/proy-2-FHVJFFyN.webp",
+  kh = "./assets/proy-3-Xyym51tN.webp",
+  Eh = "./assets/proy-4-3wanK3ot.webp",
+  Nh = "./assets/proy-5-pZekphWe.webp",
+  Ch = "./assets/logo-wvjWeUmf.png",
   _h = () => {
     const e = ii.useRef(null),
       t = (r) => {
