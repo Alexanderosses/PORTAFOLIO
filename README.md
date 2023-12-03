@@ -2,7 +2,10 @@
 
 ¡Bienvenido a mi portafolio de proyectos! Aquí encontrarás una muestra de cinco proyectos destacados que desarrollé durante mi participación en el Bootcamp de la Universidad del Desarrollo (UDD). Estos proyectos abarcan diversas áreas del desarrollo web y aplican una variedad de tecnologías para crear soluciones digitales impactantes.
 
-## Proyectos Destacados
+### PORTAFOLIO GITHUB PAGE - [Ver PORTAFOLIO](https://alexanderosses.github.io/PORTAFOLIO/)
+   - Desarrollo de un portafolio utilizando HTML, CSS, React, JavaScript, Bootstrap React.
+
+## Proyectos Destacados del portafolio
 
 ### 1. Landing - [Ver Proyecto](https://alexanderosses.github.io/LANDING-DE-NEGOCIO/)
    - Desarrollo de una interfaz de usuario (UI) utilizando HTML y CSS.
