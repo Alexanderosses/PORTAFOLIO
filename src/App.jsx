@@ -1,33 +1,89 @@
 import './App.css'
-import React from 'react';
-import { Navigate, Routes, Route } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useEffect, useRef, useState } from 'react';
 import imagen1 from './assets/proy-1.webp';
 import imagen2 from './assets/proy-2.webp';
 import imagen3 from './assets/proy-3.webp';
 import imagen4 from './assets/proy-4.webp';
 import imagen5 from './assets/proy-5.webp';
-import logo from './assets/logo.png';
+import logoIco1 from './assets/logo-AO-1.webp';
+import logoIco2 from './assets/logo-AO-2.webp';
+
 
 export const App = () => {
+    const isMobile = window.innerWidth <= 768; // Media query para programar ajusta el ancho según tus necesidades
+    const scrollContainer = useRef(null);
+    const handleScroll = (event) => {
+        if (!isMobile) {
+        const delta = Math.sign(event.deltaY);
+        scrollContainer.current.scrollLeft += delta * 250;
+        }
+    };
+      
+    const handleArrowClick = (direction) => {
+        if (!isMobile) {
+        const delta = direction === 'left' ? -250 : 250;
+        scrollContainer.current.scrollLeft += delta;
+        }
+    };     
 
-        const scrollContainer = React.useRef(null);
-      
-        const handleScroll = (event) => {
-          const delta = Math.sign(event.deltaY);
-          scrollContainer.current.scrollLeft += delta * 150;
+    const menuRef = useRef(null);
+
+    const [logoIco1aOpacity, setLogoIco1aOpacity] = useState(1);
+    const logoIco1aRef = useRef(null);
+    const logoIco2Ref = useRef(null);
+
+  
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) {
+                setLogoIco1aOpacity(1);
+              } else {
+                setLogoIco1aOpacity(0);
+              }
+            });
+          },
+          { threshold: 0 }
+        );
+    
+        if (logoIco2Ref.current) {
+          observer.observe(logoIco2Ref.current);
+        }
+    
+        return () => {
+          observer.disconnect();
         };
-      
-        const handleArrowClick = (direction) => {
-          const delta = direction === 'left' ? -150 : 150;
-          scrollContainer.current.scrollLeft += delta;
-        };
-      
+
+      }, [logoIco2Ref]);
+    
+      const logoIco1aStyle = {
+        opacity: logoIco1aOpacity,
+        transition: 'opacity 0.5s ease', // Agrega una transición suave de 0.5 segundos
+      };
+  
+      useEffect(() => {
+        if (!isMobile) {
+        const menu = menuRef.current;
+        const menuTop = logoIco1aOpacity === 0 ? '35px' : '70px';
+        if (menu) {
+          menu.style.top = menuTop;
+          menu.style.transition = 'top 0.5s ease'; // Transición suave de 0.5 segundos
+        }
+    }
+      }, [logoIco1aOpacity, isMobile]);
+
+    
 
   return (
     <>  
-    <Container fluid>
-        <ul className="col-md-12 d-flex justify-content-center align-items-stretch">
+    <Container fluid hide>
+        <Row>
+        <div className='col-md-12 mx-auto d-flex logoIco1a'  ref={logoIco1aRef} style={logoIco1aStyle} >
+            <img src={logoIco1} alt="" className='logoIco1'/>
+        </div>
+        <ul className="col-md-12 menu" ref={menuRef} id='menu'>
             <li><a href="#inicio">INICIO</a></li>
             <li><a href="#portafolio">PRESENTACIÓN</a></li>
             <li><a href="#proyecto1">LANDING</a></li>
@@ -37,6 +93,9 @@ export const App = () => {
             <li><a href="#proyecto5">ECOMMERCE</a></li>
             <li><a href="#contacto">CONTACTO</a></li>
         </ul>
+        </Row>
+    </Container>  
+    <Container fluid>
         <Row>
             <Col md={12}  className="m-0" id="scroll-wrapper">
                 {/* Paneles Deslizantes */}
@@ -45,8 +104,8 @@ export const App = () => {
                     {/* Panel 1 BIENVENIDA */}
                     <Col md={12} className="panel-0 ml-13 me-5 h-100 " id="inicio">
                         <div className="row ">
-                            <div className="col-md-4">
-                                <img src={logo} className="img-fluid" alt=""/>
+                            <div className="col-md-4 d-flex justify-content-end " >
+                                <img src={logoIco2} className="logoIco2" alt="" ref={logoIco2Ref} />
                             </div>
                             <div className="col-md-8 p-5 d-flex flex-column justify-content-center">
                                 <h1>Hola, me llamo<br />
@@ -78,7 +137,7 @@ export const App = () => {
                     {/* PROYECTO 1 */}
                     <Col md={12} className="panel-2 h-100 " id="proyecto1">
                         <div className="row">
-                            <div className="col g-0">
+                            <div className="col g-0 hide">
                                 <img src={imagen1} className="img-fluid h-100" alt="..."/>
                             </div>
                             <div className="col-md-8 g-0 p-5  d-flex flex-column justify-content-center">
@@ -96,7 +155,7 @@ export const App = () => {
                   {/* PROYECTO 2 */}
                     <Col md={12} className="panel-2 h-100 " id="proyecto2" >
                         <div className="row">
-                            <div className="col g-0">
+                            <div className="col g-0 hide">
                                 <img src={imagen2} className="img-fluid h-100" alt="..."/>
                             </div>
                             <div className="col-md-8 g-0 p-5  d-flex flex-column justify-content-center">
@@ -114,7 +173,7 @@ export const App = () => {
                   {/* PROYECTO 3 */}
                     <Col md={12} className="panel-2 h-100 " id="proyecto3">
                         <div className="row">
-                            <div className="col g-0">
+                            <div className="col g-0 hide">
                                 <img src={imagen3} className="img-fluid h-100" alt="..."/>
                             </div>
                             <div className="col-md-8 g-0 p-5  d-flex flex-column justify-content-center">
@@ -132,7 +191,7 @@ export const App = () => {
                   {/* PROYECTO 4 */}
                     <Col md={12} className="panel-2 h-100 " id="proyecto4" >
                         <div className="row">
-                            <div className="col g-0">
+                            <div className="col g-0 hide">
                                 <img src={imagen4} className="img-fluid h-100" alt="..."/>
                             </div>
                             <div className="col-md-8 g-0 p-5  d-flex flex-column justify-content-center">
@@ -150,15 +209,14 @@ export const App = () => {
                   {/* PROYECTO 5 */}
                     <Col md={12} className="panel-2 h-100 " id="proyecto5">
                         <div className="row">
-                            <Col md={4} className="g-0">
+                            <Col md={4} className="g-0 hide">
                                 <img src={imagen5} className="img-fluid h-100" alt="..."/>
                             </Col>
                             <Col md={8} className="g-0 p-5  d-flex flex-column justify-content-center">
                                 <span className="bold">Proyecto 5</span>
                                 <h2>Ecommerce</h2>                                    
-                                <p className="text-p">En en el proyecto, se utilizaron tecnologías como <span className="bold">JavaScript</span>, <span className="bold">React JS</span>, <span className="bold">React Bootstrap</span>, <span className="bold">MongoDB</span>, Render y <span className="bold">Node JS</span> para el frontend y backend. Además, se integro <span className="bold">MercadoPago</span> y se utilizó <span className="bold">HTML</span> y <span className="bold">CSS</span> para la estructura y estilo.</p>
-                                <a className="btn-own" href="https://alexanderosses.github.io/TIENDA-EN-LINEA/" role="button" target="_blank" rel='noreferrer'>Ver proyecto</a>
-                                <a className="btn-img" href="https://www.credly.com/badges/a1de7a1e-e249-4a92-927e-72310fe0af37/public_url" target="_blank" rel='noreferrer'>
+                                <p className="text-p">Para el proyecto, se utilizaron tecnologías como <span className="bold">JavaScript</span>, <span className="bold">React JS</span>, <span className="bold">React Bootstrap</span>, <span className="bold">MongoDB</span>, Render y <span className="bold">Node JS</span> para frontend y backend. Se integro <span className="bold">MercadoPago</span> y se utilizó <span className="bold">HTML</span> y <span className="bold">CSS</span>.</p>
+                                <a className="btn-own" href="https://alexanderosses.github.io/TIENDA-EN-LINEA/" role="button" target="_blank" rel='noreferrer'>Ver proyecto</a>                                <a className="btn-img" href="https://www.credly.com/badges/a1de7a1e-e249-4a92-927e-72310fe0af37/public_url" target="_blank" rel='noreferrer'>
                                     <img className="credly" src="https://alexanderosses.cl/img/INS-REACT-JS.webp" alt=""/>
                                 </a>
                             </Col>
@@ -193,6 +251,14 @@ export const App = () => {
                     <svg className='arrowGo' xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
                 </button>
             </div>
+        </Row>
+    </Container>
+    <Container fluid>
+        <Row>
+        <footer className="col-md-8 mx-auto fixed-bottom mt-10 footertext mt-10 mb-4">
+                    Diseñado y construido con <svg xmlns="http://www.w3.org/2000/svg" className="icon-footer" viewBox="0 0 24 24"><path d="M12 4.419c-2.826-5.695-11.999-4.064-11.999 3.27 0 7.27 9.903 10.938 11.999 15.311 2.096-4.373 12-8.041 12-15.311 0-7.327-9.17-8.972-12-3.27z"/></svg> por Alexander Osses · 2023 · Santiago de Chile <br/>
+                    Diseñado con <span className="footerDestacado">Figma</span>, tratamiento de imagenes con <span className="footerDestacado">Photoshop</span>, <span className="footerDestacado">Ilustrator</span>, codeado con <span className="footerDestacado">Visual Studio Code</span>, construido con <span className="footerDestacado">HTML5</span>, <span className="footerDestacado">CSS</span>, <span className="footerDestacado">React Bootstrap</span>, <span className="footerDestacado">React</span>, <span className="footerDestacado">Vite</span>,  <span className="footerDestacado">JavaScript</span>, <span className="footerDestacado">Iconmonstr</span>, para ver más proyectos visita el sitio oficial <a href='https://www.alexanderosses.cl' target='_self'><span className="footerDestacado">AQUÍ</span></a>. 
+        </footer>
         </Row>
     </Container>
     </>
