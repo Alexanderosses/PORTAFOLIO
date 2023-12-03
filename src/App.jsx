@@ -1,5 +1,6 @@
 import './App.css'
 import React from 'react';
+import { Navigate, Routes, Route } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import imagen1 from './assets/proy-1.webp';
 import imagen2 from './assets/proy-2.webp';
@@ -24,7 +25,7 @@ export const App = () => {
       
 
   return (
-    <>    
+    <>  
     <Container fluid>
         <ul className="col-md-12 d-flex justify-content-center align-items-stretch">
             <li><a href="#inicio">INICIO</a></li>
