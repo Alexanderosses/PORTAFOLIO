@@ -90,7 +90,7 @@ import logo from '../assets/logo.png';
                         </div>
                     </Col>
 
-                    {/* PROYECTO 2 */}
+                  {/* PROYECTO 2 */}
                     <Col md={12} className="panel-2 h-100 " id="proyecto2" >
                         <div className="row">
                             <div className="col g-0">
