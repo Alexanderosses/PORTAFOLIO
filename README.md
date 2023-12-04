@@ -44,6 +44,6 @@
 - [GitHub](https://github.com/Alexanderosses)
 - [LinkedIn](https://www.linkedin.com/in/alexanderosses/)
 
-![Wireframe](wireframe.png)
+![Wireframe](wireframe.png){width=400px}
 
 Espero que disfrutes explorando estos proyectos tanto como disfruté desarrollándolos. ¡Gracias por visitar mi portafolio!
