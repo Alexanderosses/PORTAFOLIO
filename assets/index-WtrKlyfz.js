@@ -10443,7 +10443,7 @@ var ls;
 })(ls || (ls = {}));
 Jl.createRoot(document.getElementById("root")).render(
   c.jsx(_p, {
-    basename: "./",
+    basename: "/",
     children: c.jsx(ms.StrictMode, { children: c.jsx(vp, {}) }),
   })
 );
